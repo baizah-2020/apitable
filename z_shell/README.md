@@ -5,7 +5,9 @@
     cd z_shell
 
     # 1）构建 backend-server, init-db, openresty 
-    sh package-other.sh
+    sh package-backend-server.sh
+    sh package-init-db.sh
+    sh package-openresty.sh
 
     # 2）构建 room-server
     sh package-other.sh
