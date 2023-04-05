@@ -1,5 +1,5 @@
 group "default" {
-  targets = ["backend-server", "init-db", "openresty"]
+  targets = ["backend-server"]
 }
 
 variable "IMAGE_REGISTRY" {
