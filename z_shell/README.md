@@ -10,8 +10,8 @@
     sh package-openresty.sh
 
     # 2）构建 room-server
-    sh package-other.sh
+    sh package-room-server.sh
 
     # 3）构建 web-server
-    sh package-other.sh
+    sh package-web-server.sh
 
