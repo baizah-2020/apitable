@@ -15,7 +15,7 @@ COPY packages/core/package.json ./packages/core/
 COPY packages/room-native-api/package.json ./packages/room-native-api/
 
 COPY packages/room-server/package.json ./packages/room-server/
-RUN tail -f /dev/null
+
 RUN yarn workspaces focus @apitable/room-server root
 
 # stage builder
