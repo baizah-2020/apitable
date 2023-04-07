@@ -20,26 +20,6 @@
     docker load -i nginx
     docker run -itd --name ng -p 80:80 -p 443:443 -v /root/nginx/:/etc/nginx/conf.d  nginx:1.23.4
 
-## 4、缓存 gradle 编译包及依赖包
-    cd apitable-new
-    docker run -itd --name bs amazoncorretto:8 /bin/bash
-    docker cp backend-server bs:/
-    docker exec -it bs /bin/bash
-    cd /backend-server
-    # 反复执行该命令，直到编译通过
-    ./gradlew build -x test 
-    
-    # 下载 .gradle 目录
-    docker cp bs:/root/.gradle/ ./ 
-    mv .gradle gradle
-    cd gradle
-    # 将 gradle/wrapper/dists/gradle-7.5-bin/xxx文件夹/gradle-7.5-bin.zip 复制到 .gradle 目录
-    mv wrapper/dists/gradle-7.5-bin/xxx文件夹/gradle-7.5-bin.zip
-
-    rm -rf daemon/ jdks/ notifications/ native/ workers/
-
-    注意：gradle 目录需要放在本项目顶级目录所在的父目录文件夹。
-
 
 
 
