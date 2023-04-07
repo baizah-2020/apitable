@@ -15,3 +15,7 @@
     # 3）构建 web-server
     sh package-web-server.sh
 
+## 3、设置 gradle 下载代理
+    scp -r nginx root@192.168.4.84:/root
+    docker load -i nginx
+    docker run -itd --name ng -p 80:80 -p 443:443 -v /root/nginx/:/etc/nginx/conf.d  nginx:1.23.4
