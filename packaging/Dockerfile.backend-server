@@ -6,7 +6,7 @@ COPY ./backend-server/. .
 # RUN mkdir -p /root/.gradle
 # COPY /root/gradle/. /root/.gradle/
 
-RUN tail -f /dev/null
+# RUN tail -f /dev/null
 
 RUN ./gradlew build -x test
 
