@@ -38,6 +38,8 @@
 
     rm -rf daemon/ jdks/ notifications/ native/ workers/
 
+    注意：gradle 目录需要放在本项目顶级目录所在的父目录文件夹。
+
 
 
 
