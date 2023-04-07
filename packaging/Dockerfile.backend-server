@@ -2,8 +2,13 @@ FROM amazoncorretto:8 AS builder
 
 WORKDIR /app
 COPY ./backend-server/. .
-RUN ./gradlew build -x test
 
+# RUN mkdir -p /root/.gradle
+# COPY /root/gradle/. /root/.gradle/
+
+RUN tail -f /dev/null
+
+RUN ./gradlew build -x test
 
 FROM amazoncorretto:8
 
