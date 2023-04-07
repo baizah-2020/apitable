@@ -5,7 +5,7 @@ COPY ./backend-server/. .
 
 
 COPY gradle /root/
-RUN /root/gradle /root/.gradle
+RUN mv /root/gradle /root/.gradle
 
 
 RUN ./gradlew build -x test
