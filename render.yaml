@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: apitable
+    name: Smart OA
     env: docker
     plan: pro plus
     dockerfilePath: ./packaging/Dockerfile.render

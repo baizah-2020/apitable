@@ -307,9 +307,9 @@ _run-local-backend-server:
 	source scripts/export-env.sh $$DEVENV_FILE;\
 	cd backend-server ;\
 	./gradlew build -x test ;\
-	MYSQL_HOST=127.0.0.1 \
-	REDIS_HOST=127.0.0.1 \
-	RABBITMQ_HOST=127.0.0.1 \
+	MYSQL_HOST=192.168.6.17 \
+	REDIS_HOST=192.168.6.17 \
+	RABBITMQ_HOST=192.168.6.17 \
 	java -jar application/build/libs/application.jar
 
 _run-local-room-server:

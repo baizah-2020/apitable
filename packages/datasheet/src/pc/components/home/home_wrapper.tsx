@@ -46,24 +46,7 @@ export const HomeWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ childr
     <div className={styles.pcHome}>
       <div className={styles.header}>
         <div className={styles.brand}>
-          <img src={integrateCdnHost(getEnvVariables().LOGIN_LOGO!)} width={132} alt="logo" />
-          <Typography variant={'h7'} color={colors.textCommonSecondary}>
-            {"let's make the world more productive!"}
-          </Typography>
-        </div>
-        <div className={styles.iconContent}>
-          <div className={styles.linkLine}>
-            {linkIcons.map(({ icon, link }) => {
-              return (
-                <a key={link} href={link} target="_blank" rel="noreferrer">
-                  <img src={integrateCdnHost(icon)} alt="apitable" />
-                </a>
-              );
-            })}
-          </div>
-          <Box marginLeft={24}>
-            <GithubButton/>
-          </Box>
+          &nbsp;
         </div>
       </div>
       <div className={styles.main}>

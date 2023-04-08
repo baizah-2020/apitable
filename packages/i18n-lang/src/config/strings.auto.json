@@ -3074,8 +3074,8 @@
             "zh_HK": "交流群"
         },
         "community": {
-            "zh_CN": "社区版",
-            "en_US": "Community"
+            "zh_CN": "special",
+            "en_US": "special"
         },
         "community_and_local_interest": {
             "zh_CN": "社区与本地兴趣",
@@ -3083,9 +3083,9 @@
             "zh_HK": "社區與本地興趣"
         },
         "community_edition": {
-            "zh_CN": "开源社区版",
-            "en_US": "Community",
-            "zh_HK": "開源社區版"
+            "zh_CN": "special",
+            "en_US": "special",
+            "zh_HK": "special"
         },
         "comoros": {
             "zh_CN": "科摩罗",

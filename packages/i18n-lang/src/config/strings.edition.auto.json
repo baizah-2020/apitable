@@ -1,8 +1,8 @@
 {
     "strings": {
         "og_page_title": {
-            "en_US": " APITable ",
-            "zh_CN": " APITable "
+            "en_US": " Smart OA ",
+            "zh_CN": " Smart OA "
         },
         "dashboard_access_denied_help_link": {
             "zh_HK": "https://help.apitable.com/docs/guide/intro-dashboard#access-denied",
@@ -130,19 +130,19 @@
             "zh_CN": "抱歉，此为旧版本下的运行历史，不支持查看输入输出"
         },
         "system_configuration_product_name": {
-            "zh_HK": "APITable",
-            "en_US": "APITable",
-            "zh_CN": "APITable"
+            "zh_HK": "Smart OA",
+            "en_US": "Smart OA",
+            "zh_CN": "Smart OA"
         },
         "official_name": {
-            "zh_HK": "APITable",
-            "en_US": "APITable",
-            "zh_CN": "APITable"
+            "zh_HK": "Smart OA",
+            "en_US": "Smart OA",
+            "zh_CN": "Smart OA"
         },
         "login_title": {
-            "zh_HK": "進入 APITable",
-            "en_US": "Login APITable",
-            "zh_CN": "进入 APITable"
+            "zh_HK": "進入 Smart OA",
+            "en_US": "Login Smart OA",
+            "zh_CN": "进入 Smart OA"
         },
         "assistant_beginner_task_title2": {
             "zh_HK": "跟著指引開始你的 APITable 之旅吧～",
@@ -705,9 +705,9 @@
             "zh_CN": "请输入表格名称"
         },
         "template_centre": {
-            "zh_HK": "APITable 模板中心",
+            "zh_HK": "模板中心",
             "en_US": "Templates",
-            "zh_CN": "APITable 模板中心"
+            "zh_CN": "模板中心"
         },
         "activity_login_desc": {
             "zh_HK": "你的好友「${nickname}」邀請你註冊使用 APITable",
@@ -1575,9 +1575,9 @@
             "zh_CN": "登录"
         },
         "bronze_grade": {
-            "zh_HK": "社區版",
-            "en_US": "Community",
-            "zh_CN": "社区版"
+            "zh_HK": "special",
+            "en_US": "special",
+            "zh_CN": "special"
         },
         "new_user_welcome_notify": {
             "zh_HK": "歡迎加入 APITable，我們為你準備了一份免費學習 APITable 的見面禮，點擊這條消息即可跳轉了解詳情。",
