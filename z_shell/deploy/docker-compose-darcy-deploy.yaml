@@ -113,7 +113,7 @@ services:
     image: ${IMAGE_MINIO}
     pull_policy: ${IMAGE_PULL_POLICY:-if_not_present}
     restart: always
-    command: server /data --console-address :9000 --address :9012
+    command: server /data --console-address :9012 --address :9000
     expose:
       - "9000"
     volumes:
