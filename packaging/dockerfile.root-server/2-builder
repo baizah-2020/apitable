@@ -1,0 +1,23 @@
+# stage builder
+FROM apitable/room-server-builder:v16.15.0 AS builder
+
+WORKDIR /app
+
+COPY room-server_1-deps/node_modules ./node_modules
+COPY room-server_1-deps/room-server/node_modules ./packages/room-server/node_modules
+
+COPY .yarn ./.yarn
+
+COPY ./.yarnrc.yml ./package.json ./yarn.lock ./common-tsconfig.json ./
+
+COPY packages/i18n-lang ./packages/i18n-lang
+
+COPY packages/core ./packages/core
+
+COPY packages/room-native-api ./packages/room-native-api
+
+COPY packages/room-server ./packages/room-server
+
+RUN yarn build:sr
+
+RUN yarn build:room-native-api:arm64

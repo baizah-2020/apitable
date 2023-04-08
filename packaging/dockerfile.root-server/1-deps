@@ -1,0 +1,19 @@
+# Install dependencies only when needed
+FROM apitable/node:v16.15.0
+
+WORKDIR /app
+
+COPY .yarn ./.yarn
+
+# install packages can use cache
+COPY ./.yarnrc.yml ./package.json ./yarn.lock ./common-tsconfig.json ./
+
+COPY packages/i18n-lang/package.json ./packages/i18n-lang/
+
+COPY packages/core/package.json ./packages/core/
+
+COPY packages/room-native-api/package.json ./packages/room-native-api/
+
+COPY packages/room-server/package.json ./packages/room-server/
+
+RUN yarn workspaces focus @apitable/room-server root

@@ -1,0 +1,19 @@
+# Install dependencies only when needed
+FROM apitable/nodepy:16.15.0-alpine
+
+WORKDIR /workspace-install
+
+COPY .yarn/ ./.yarn/
+COPY ./.yarnrc.yml ./yarn.lock ./package.json ./
+
+# datasheet dependencies packages
+COPY packages/components/package.json ./packages/components/
+COPY packages/core/package.json ./packages/core/
+COPY packages/i18n-lang/package.json ./packages/i18n-lang/
+COPY packages/icons/package.json ./packages/icons/
+COPY packages/widget-sdk/package.json ./packages/widget-sdk/
+
+# datasheet main
+COPY packages/datasheet/package.json ./packages/datasheet/
+
+RUN yarn workspaces focus @apitable/datasheet root

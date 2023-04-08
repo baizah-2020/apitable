@@ -1,0 +1,38 @@
+# stage runner
+FROM apitable/nodepy:16.15.0-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV production
+
+# Uncomment the following line in case you want to disable telemetry during runtime.
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+
+COPY web-server_2-web-builder/.yarn ./.yarn
+COPY web-server_2-web-builder/.yarnrc.yml ./
+COPY web-server_2-web-builder/package.json ./
+COPY web-server_2-web-builder/yarn.lock ./
+
+COPY web-server_2-web-builder/datasheet/public ./packages/datasheet/public
+COPY web-server_2-web-builder/datasheet/next.config.js ./packages/datasheet/
+COPY web-server_2-web-builder/datasheet/font-weight-no-number.js ./packages/datasheet/
+COPY web-server_2-web-builder/datasheet/package.json ./packages/datasheet/
+
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+
+COPY --chown=nextjs:nodejs web-server_2-web-builder/standalone ./
+COPY --chown=nextjs:nodejs web-server_2-web-builder/static ./packages/datasheet/web_build/static
+
+WORKDIR /app/packages/datasheet
+
+USER nextjs
+
+EXPOSE 8080
+
+ENV PORT 8080
+
+CMD [ "node", "server.js" ]

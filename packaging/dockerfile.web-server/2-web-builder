@@ -1,0 +1,23 @@
+# stage builder
+FROM apitable/nodepy:16.15.0-alpine AS builder
+
+ARG SEMVER_FULL="v0.0.0-alpha"
+ARG NEXT_ASSET_PREFIX=""
+ARG NEXT_PUBLIC_ASSET_PREFIX=""
+ENV SEMVER_FULL=${SEMVER_FULL}
+
+WORKDIR /app
+
+COPY web-server_1-web-deps/node_modules ./node_modules
+COPY web-server_1-web-deps/web-server/node_modules ./packages/datasheet/node_modules
+
+COPY .yarn ./.yarn
+COPY ./.yarnrc.yml ./package.json ./yarn.lock ./common-tsconfig.json ./tsconfig.json ./.eslintrc ./
+COPY packages/ ./packages/
+
+RUN set -eux; \
+    sed -i~ '$a\WEB_CLIENT_VERSION='${SEMVER_FULL}'' packages/datasheet/.env; \
+    sed -i~ 's~^NEXT_ASSET_PREFIX=.*~NEXT_ASSET_PREFIX='${NEXT_ASSET_PREFIX}'~' packages/datasheet/.env; \
+    sed -i~ 's~^NEXT_PUBLIC_ASSET_PREFIX=.*~NEXT_PUBLIC_ASSET_PREFIX='${NEXT_PUBLIC_ASSET_PREFIX}'~' packages/datasheet/.env
+
+RUN yarn build:dst
