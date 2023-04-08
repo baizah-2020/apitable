@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common_util.sh
+source ../common_util.sh
 
 
 chmod +x ./docker-compose
