@@ -20,6 +20,6 @@ cp packaging/dockerfile.root-server/2-builder ./
 docker build --network host --no-cache -f 2-builder -t room-server_2-builder:1.0 .
 rm -f 2-builder
 
-rm -rf room-server_2-builder
+# rm -rf room-server_2-builder
 
 
