@@ -26,7 +26,7 @@
     "build:datasheet": "yarn workspace @apitable/datasheet build",
     "build:widget-sdk": "yarn workspace @apitable/widget-sdk build",
     "build:room-server": "yarn workspace @apitable/room-server build",
-    "build:sr": "yarn workspaces foreach --include '?(@apitable/i18n-lang|@apitable/core|@apitable/room-native-api|@apitable/room-server)' -t -j 8 run build",
+    "build:sr": "yarn workspaces foreach --include '?(@apitable/i18n-lang|@apitable/core|@apitable/room-native-api|@apitable/room-server)' -pt -j 8 run build",
     "build:icons": "yarn workspace @apitable/icons build",
     "build:components": "yarn workspace @apitable/components build",
     "build:components:doc": "yarn workspace @apitable/components build-storybook",
