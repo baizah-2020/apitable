@@ -2,6 +2,7 @@
 
 source ../common_util.sh
 
+rm -rf .data
 
 chmod +x ./docker-compose
 
