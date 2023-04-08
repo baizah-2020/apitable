@@ -3,8 +3,8 @@ FROM apitable/room-server-builder:v16.15.0 AS builder
 
 WORKDIR /app
 
-COPY room-server_1-deps/node_modules ./node_modules
-COPY room-server_1-deps/room-server/node_modules ./packages/room-server/node_modules
+COPY room-server_1-deps/node_modules-1 ./node_modules
+COPY room-server_1-deps/room-server/node_modules-1 ./packages/room-server/node_modules
 
 COPY .yarn ./.yarn
 

@@ -14,6 +14,8 @@ docker run -itd --name room-server_1-deps room-server_1-deps:1.0 /bin/sh
 
 docker cp room-server_1-deps:/app/node_modules room-server_1-deps
 docker cp room-server_1-deps:/app/packages/room-server/node_modules room-server_1-deps/room-server
+mv room-server_1-deps/node_modules room-server_1-deps/node_modules-1
+mv room-server_1-deps/room-server/node_modules room-server_1-deps/room-server/node_modules-1
 
 docker rm -f room-server_2-builder
 cp packaging/dockerfile.root-server/2-builder ./
