@@ -17,10 +17,10 @@ COPY packages/room-native-api/package.json ./packages/room-native-api/
 COPY packages/room-server/package.json ./packages/room-server/
 
 
-RUN mkdir -p /app/node_modules
-RUN mkdir -p /app/packages/room-server/node_modules
-COPY room-server-deps/node_modules-1 /app/node_modules
-COPY room-server-deps/node_modules-1 /app/packages/room-server/node_modules
+# RUN mkdir -p /app/node_modules
+# RUN mkdir -p /app/packages/room-server/node_modules
+# COPY room-server-deps/node_modules-1 /app/node_modules
+# COPY room-server-deps/node_modules-1 /app/packages/room-server/node_modules
 
 
 RUN yarn workspaces focus @apitable/room-server root
