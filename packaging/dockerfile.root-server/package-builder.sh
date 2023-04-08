@@ -9,7 +9,7 @@ rm -rf room-server_2-builder
 
 
 mkdir -p room-server_1-deps/room-server
-
+docker rm -f room-server_1-deps
 docker run -itd --name room-server_1-deps room-server_1-deps:1.0 /bin/sh
 
 docker cp room-server_1-deps:/app/node_modules room-server_1-deps

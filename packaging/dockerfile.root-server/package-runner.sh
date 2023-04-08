@@ -8,7 +8,7 @@ cd ../../
 rm -rf room-server_3-runner
 
 
-
+docker rm -f room-server_2-builder
 docker run -itd --name room-server_2-builder room-server_2-builder:1.0 /bin/sh
 
 mkdir -p room-server_2-builder/room-server
