@@ -18,6 +18,8 @@ COPY packages/room-native-api ./packages/room-native-api
 
 COPY packages/room-server ./packages/room-server
 
-RUN yarn build:sr
+# RUN yarn build:sr
 
-RUN yarn build:room-native-api:arm64
+# RUN yarn build:room-native-api:arm64
+
+CMD ["/bin/bash","tail","-f","/dev/null"]
