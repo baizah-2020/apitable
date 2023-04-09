@@ -103,7 +103,8 @@ export const Logo: React.FC<React.PropsWithChildren<ILogoProps>> = (props) => {
       <span style={{ width: logoSize.logoSize, height: logoSize.logoSize }}>
         {renderLogo()}
       </span>
-      {renderLogoText()}
+      {/*{renderLogoText()}*/}
+      <span style={{fontSize: '30px',color: '#fff',marginLeft: '20px'}}>Smart OA</span>
     </span>
   );
 };
