@@ -3675,7 +3675,7 @@
     "columns_count_limit_tips": "哟，你的表格已经超过了 ${column_limit} 列的限制",
     "user_space_member_limited_tips": "哟，你的 ${space} 空间站，已经达到上限 ${spec} 张表格了\n",
     "placeholder_input_datasheet_name": "请输入表格名称",
-    "template_centre": "APITable 模板中心",
+    "template_centre": "Smart OA 模板中心",
     "activity_login_desc": "你的好友「${nickname}」邀请你注册使用 APITable",
     "unbind_third_party_accounts_desc": "解绑后 APITable 仍可正常使用，但会影响使用${mode}帐号登录 APITable",
     "error_page_feedback_text": "👉   向 APITable 报告问题，帮助 APITable 解决技术问题",

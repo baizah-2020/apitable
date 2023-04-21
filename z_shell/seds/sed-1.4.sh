@@ -171,6 +171,9 @@ sed -i 's#"zh_CN": "什么是 APITable",#"zh_CN": "什么是 Smart OA",#g' packa
 sed -i 's#"zh_HK": "什麼是 APITable"#"zh_HK": "什麼是 Smart OA"#g' packages/i18n-lang/src/config/strings.edition.auto.json
 sed -i 's#"en_US": "Welcome to APITable#"en_US": "Welcome to Smart OA#g' packages/i18n-lang/src/config/strings.edition.auto.json
 
+
+sed -i 's#APITable 模板中心#Smart OA 模板中心#g' packages/i18n-lang/src/config/strings.json
+
 # sed -i '51,58c &nbsp;' packages/i18n-lang/src/config/strings.edition.auto.json
 # sed -i '51,58c &nbsp;' packages/i18n-lang/src/config/strings.json
 
