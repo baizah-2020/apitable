@@ -1,3 +1,5 @@
-src/pc/common/i18n
+src/pc
 src/static/lang/*
 **/*.js
+**/*.ts
+**/*.tsx
