@@ -6,8 +6,8 @@
             "zh_HK": "https://help.apitable.com/docs/guide/manual-field-cascader"
         },
         "og_page_title": {
-            "zh_CN": " APITable ",
-            "en_US": " APITable "
+            "zh_CN": " Smart OA ",
+            "en_US": " Smart OA "
         },
         "dashboard_access_denied_help_link": {
             "zh_CN": "https://help.apitable.com/docs/guide/intro-dashboard#access-denied",
@@ -65,14 +65,14 @@
             "zh_HK": "https://help.apitable.com/docs/guide/manual-field-single-line-text"
         },
         "client_meta_label_desc": {
-            "zh_CN": "APITable, 积木式多媒体数据表格, 多维表格技术首创者, 数据整理神器, 让人人都是数据设计师",
-            "en_US": "APITable - a data productivity platform that helps you manage your work data more efficiently",
-            "zh_HK": "APITable, 積木式多媒體數據表格, 多維表格技術首創者, 數據整理神器, 讓人人都是數據設計師"
+            "zh_CN": "Smart OA, 积木式多媒体数据表格, 多维表格技术首创者, 数据整理神器, 让人人都是数据设计师",
+            "en_US": "Smart OA  - a data productivity platform that helps you manage your work data more efficiently",
+            "zh_HK": "Smart OA , 積木式多媒體數據表格, 多維表格技術首創者, 數據整理神器, 讓人人都是數據設計師"
         },
         "client_meta_label_title": {
-            "zh_CN": "APITable - 积木式多媒体数据表格",
-            "en_US": "APITable - a data productivity platform",
-            "zh_HK": "APITable - 積木式多媒體數據表格"
+            "zh_CN": "Smart OA - 积木式多媒体数据表格",
+            "en_US": "Smart OA  - a data productivity platform",
+            "zh_HK": "Smart OA  - 積木式多媒體數據表格"
         },
         "api_panel_md_js_example": {
             "zh_CN": "## 初始化 SDK [![github]({{ githubIcon }})](https://github.com/apitable/apitable-sdks)\n\n```js\n// 如果不能使用 es6 import，可用 const APITable = require('apitable').default; 代替\nimport { APITable } from \"apitable\";\n\nconst apitable = new APITable({ token: \"{{ apiToken }}\", fieldKey: \"{{ fieldKey }}\" });\n// 通过 datasheetId 来指定要从哪张表格操作数据。\nconst datasheet = apitable.datasheet(\"{{ datasheetId }}\");\n```\n\n<!--split-->\n\n## 获取记录\n\n```js\n\n// 获取 {{ viewId }} 视图下的记录, 默认返回第一页。\ndatasheet.records.query({ viewId: \"{{ viewId }}\"}).then(response => {\n  if (response.success) {\n    console.log(response.data);\n  } else {\n    console.error(response);\n  }\n});\n\n```\n\n### 示例返回值\n\n```json\n{{ response }}\n```\n\n### 其他参数或提示\n```js\n/**\n * 全局参数配置\n */\nnew APITable({\n  /**\n   * (必填) string 你的 API Token，用于鉴权\n   */\n  token: 'YOUR_API_TOKEN',\n  /**\n   * （选填）全局指定 field 的查询和返回的 key。默认使用列名  'name' 。指定为 'id' 时将以 fieldId 作为查询和返回方式（使用 id 可以避免列名的修改导致代码失效问题）\n   */\n  fieldKey: 'name', // 默认值\n  /**\n   * （选填）请求失效时间\n   */\n  requestTimeout: 60000, // 默认 60000ms (10 秒)\n  /**\n   * （选填）目标服务器地址\n   */\n  host: 'https://api.apitable.com/fusion/v1', // 默认值\n});\n\n/*******************************/\n\n// 获取记录\ndatasheet.record.query({\n  /**\n   * （选填）视图ID。默认为表格中第一个视图。请求会返回视图中经过视图中筛选/排序后的结果，可以搭配使用fields参数过滤不需要的字段数据\n   */\n  viewId: 'viewId1',\n  /**\n   *（选填）对返回的记录进行排序。sort 是由多个排序对象 (sort object) 组成的数组。单个排序对象的结构为 {\"order\":\"asc 或 desc\", \"field\":\"字段名称或字段 ID\"}。查询示例：sort[][field]=客户名称&sort[][order]=asc，即按照「客户名称」列的字母升序来排列返回的记录。如果 sort 与 viewId 同时使用，则 sort 指定的排序条件将会覆盖视图里的排序条件。\n   */\n  sort: [{ field: 'field1': order: 'desc' }],\n  /**\n   * （选填）recordIds 数组。如果附带此参数，则返回参数中指定的records数组。 返回值按照传入数组的顺序排序。此时无视筛选、排序。无分页，每次最多查询 1000 条\n   */\n  recordIds: ['recordId1', 'recordId2'],\n  /**\n   * （选填）指定要返回的字段（默认为字段名, 也可以通过 fieldKey 指定为字段 Id）。如果附带此参数，则返回的记录合集将会被过滤，只有指定的字段会返回。\n   */\n  fields: ['标题', '详情', '引用次数'],\n  /**\n   * （选填）使用公式作为筛选条件，返回匹配的记录，访问 https://help.apitable.com/docs/guide/tutorial-getting-started-with-formulas 了解公式使用方式\n   */\n  filterByFormula: '{引用次数} >  0',\n  /**\n   * （选填）限制返回记录的总数量。如果该值小于表中实际的记录总数，则返回的记录总数会被限制为该值。\n   */\n  maxRecords: 5000,\n  /**\n   * （选填）单元格值类型，默认为 'json'，指定为 'string' 时所有值都将被自动转换为 string 格式。\n   */\n  cellFormat: 'json',\n  /**\n   * （选填）指定 field 的查询和返回的 key。默认使用列名  'name' 。指定为 'id' 时将以 fieldId 作为查询和返回方式（使用 id 可以避免列名的修改导致代码失效问题）\n   */\n  fieldKey: 'name',\n});\n\n/*******************************/\n\n/**\n * 和 query 获取记录参数相同，自动处理分页。直到获取到所有数据为止。\n */\nconst allRecordsIter = datasheet.records.queryAll()\nfor await (const eachPageRecords of allRecordsIter) {\n  console.log(eachPageRecords)\n}\n```\n\n<!--split-->\n\n## 新增记录\n```js\n// add 方法接收一个数组值，可以同时创建多条 record，单次请求可最多创建10条 record\ndatasheet.records.create({{ records }}).then(response => {\n  if (response.success) {\n    console.log(response.data);\n  } else {\n    console.error(response);\n  }\n})\n```\n\n### 示例返回值\n\n```json\n{{ response }}\n```\n\n\n### 其他参数或提示\n\nadd 接口接收一个数组值，可以同时创建多条 record，单次请求可最多创建10条 record\n\n<!--split-->\n\n## 更新记录\n```js\n/**\n * update 接收一个数组值，可以同时更新多条 record，单次请求可最多更新10条 record\n * 特别注意： update 只会更新你传入的 fields 下的数据，未传入的不会影响，如果需要清空值，请显式传入 null\n */\ndatasheet.records.update({{ records }}).then(response => {\n  if (response.success) {\n    console.log(response.data);\n  } else {\n    console.error(response);\n  }\n})\n```\n### 示例返回值\n```json\n{{ response }}\n```\n\n\n### 其他参数或提示\n\nupdate 接口接收一个数组值，可以同时更新多条 record，单次请求可最多更新10条 record\n特别注意： update 只会更新你传入的 fields 下的数据，未传入的不会影响，如果需要清空值，请显式传入 null\n  \n<!--split-->\n\n## 删除记录\n```js\n// del 方法接收一个数组值，可以同时删除多条 record，单次请求可最多删除10条 record\ndatasheet.records.delete({{ recordIds }}).then(response => {\n  if (response.success) {\n    console.log(response.data);\n  } else {\n    console.error(response);\n  }\n})\n```\n### 示例返回值\n```json\n{\n  \"code\": 200,\n  \"success\": true,\n  \"message\": \"请求成功\"\n}\n```\n### 其他参数或提示\ndelete 接口接收一个数组值，可以同时删除多条 record，单次请求可最多删除10条 record\n\n<!--split-->\n\n## 上传文件\n\n```js\n/*\n * 从 file input 中获取文件\n * <input id=\"input\" name=\"file\" type=\"file\" accept=\"*\" >\n * 或者在 NodeJs 中使用流读取文件\n * const file = fs.createReadStream(/your/file/path)\n *\n * 下方以浏览器环境作为示例\n */\nconst input = document.getElementById('input');\n\ninput.onchange = function () {\n  const file = this.files[0];\n  datasheet.upload(file).then(response => {\n    /**\n     * response 数据包括\n     *   success: boolean\n     *   code: number\n     *   message: string\n     *   data: IAttachment\n     */\n    if (response.success) {\n      console.log(response.data);\n    } else {\n      console.error(response);\n    }\n  });\n};\n\n```\n### 示例返回值\n\n*Tips:上传完毕后，请尽快写入data 中的数据到附件单元格里，否则附件链接可能失效*\n\n```json\n{\n  \"code\": 200,\n  \"success\": true,\n  \"message\": \"请求成功\",\n  \"data\": {\n    \"id\": \"atcPtxnvqti5M\",\n    \"name\": \"6.gif\",\n    \"size\": 33914,\n    \"mimeType\": \"image/gif\",\n    \"token\": \"space/2020/09/22/01ee7202922d48688f61e34f12da5abc\",\n    \"width\": 240,\n    \"height\": 240,\n    \"url\": \"https://s1.apitable.com/space/2023/02/09/ed97d84948c648498f6b36b1b769071f\"\n  }\n}\n```\n\n### 其他参数或提示\ndelete 接口接收一个数组值，可以同时删除多条 record，单次请求可最多删除10条 record",
@@ -90,14 +90,14 @@
             "zh_HK": "<!--split-->\n\n## 獲取記錄\n\n```shell\ncurl \"{{ apiBase }}/fusion/v1/datasheets/{{ datasheetId }}/records?viewId={{ viewId }}&fieldKey={{ fieldKey }}\" \\\n  -H \"Authorization: Bearer {{ apiToken }}\"\n\n```\n\n### 示例返回值\n\n```json\n\n{{ response }}\n\n```\n\n### 其他參數或提示\n```js\n/**\n * 注意：每張表格獲取數據最大並發量限制為 1 秒鐘 5 次\n * 全部可配置的參數，可通過 URL Query Params 發送，\n */\n{\n  /**\n   * （選填）視圖ID。默認為表格中第一個視圖。請求會返回視圖中經過視圖中篩選/排序後的結果，可以搭配使用fields參數過濾不需要的字段數據\n   */\n  viewId: 'viewId1',\n  /**\n   * （選填）指定分頁的頁碼，默認為 1，與參數pageSize配合使用。\n   */\n  pageNum: 1,\n  /**\n   * （選填）指定每頁返回的記錄總數，默認為100。此參數只接受1-1000的整數。\n   */\n  pageSize: 100,\n  /**\n   * （選填）對返回的記錄進行排序。 sort 是由多個排序對象 (sort object) 組成的數組。單個排序對象的結構為 {\"order\":\"asc 或 desc\", \"field\":\"字段名稱或字段 ID\"}。查詢示例：sort[][field]=客戶名稱&sort[][order]=asc，即按照「客戶名稱」列的字母升序來排列返回的記錄。如果 sort 與 viewId 同時使用，則 sort 指定的排序條件將會覆蓋視圖裡的排序條件。\n   */\n  sort: [{ field: 'field1', order: 'desc' }],\n  /**\n   * （選填）recordIds 數組。如果附帶此參數，則返回參數中指定的records數組。返回值按照傳入數組的順序排序。此時無視篩選、排序。無分頁，每次最多查詢 1000 條\n   */\n  recordIds: ['recordId1', 'recordId2'],\n  /**\n   * （選填）指定要返回的字段（默認為字段名, 也可以通過 fieldKey 指定為字段 Id）。如果附帶此參數，則返回的記錄合集將會被過濾，只有指定的字段會返回。\n   */\n  fields: ['標題', '詳情', '引用次數'],\n  /**\n   * （選填）使用公式作為篩選條件，返回匹配的記錄，訪問 https://help.apitable.com/docs/guide/tutorial-getting-started-with-formulas 了解公式使用方式\n   */\n  filterByFormula: '{引用次數} >  0',\n  /**\n   * （選填）限制返回記錄的總數量。如果該值小於表中實際的記錄總數，則返回的記錄總數會被限制為該值。\n   */\n  maxRecords: 5000,\n  /**\n   * （選填）單元格值類型，默認為 'json'，指定為 'string' 時所有值都將被自動轉換為 string 格式。\n   */\n  cellFormat: 'json',\n  /**\n   * （選填）指定 field 的查詢和返回的 key。默認使用列名  'name' 。指定為 'id' 時將以 fieldId 作為查詢和返回方式（使用 id 可以避免列名的修改導致代碼失效問題）\n   */\n  fieldKey: 'name',\n}\n```\n\n<!--split-->\n\n## 新增記錄\n```shell\ncurl -X POST \"{{ apiBase }}/fusion/v1/datasheets/{{ datasheetId }}/records?viewId={{ viewId }}&fieldKey={{ fieldKey }}\"  \\\n  -H \"Authorization: Bearer {{ apiToken }}\" \\\n  -H \"Content-Type: application/json\" \\\n  --data '{\n  \"records\": {{ records }},\n  \"fieldKey\": \"{{ fieldKey }}\"\n}'\n\n```\n\n### 示例返回值\n\n```json\n{{ response }}\n```\n\n### 其他參數或提示\n\nadd 接口接收一個數組值，可以同時創建多條 record，單次請求可最多創建10條 record\n\n<!--split-->\n\n## 更新記錄\n```shell\ncurl -X PATCH \"{{ apiBase }}/fusion/v1/datasheets/{{ datasheetId }}/records?viewId={{ viewId }}&fieldKey={{ fieldKey }}\" \\\n  -H \"Authorization: Bearer {{ apiToken }}\" \\\n  -H \"Content-Type: application/json\" \\\n  --data '{\n  \"records\": {{ records }},\n  \"fieldKey\": \"{{ fieldKey }}\"\n}'\n```\n### 示例返回值\n\n```json\n{{ response }}\n```\n\n\n### 其他參數或提示\n\nupdate 接口接收一個數組值，可以同時更新多條 record，單次請求可最多更新10條 record\n特別注意： update 只會更新你傳入的 fields 下的數據，未傳入的不會影響，如果需要清空值，請顯式傳入 null\n\n\n<!--split-->\n\n## 刪除記錄\n```shell\ncurl -X DELETE \"{{ apiBase }}/fusion/v1/datasheets/{{ datasheetId }}/records?{{ deleteParams }}\" \\\n  -H \"Authorization: Bearer {{ apiToken }}\"\n\n```\n\n### 示例返回值\n```json\n{\n  \"code\": 200,\n  \"success\": true,\n  \"message\": \"請求成功\"\n}\n```\n\n### 其他參數或提示\n\ndelete 接口接收一個數組值，可以同時刪除多條 record，單次請求可最多刪除10條 record\n<!--split-->\n\n## 上傳文件\n\n```shell\ncurl -X POST \"{{ apiBase }}/fusion/v1/datasheets/{{ datasheetId }}/attachments\" \\\n  -H \"Authorization: Bearer {{ apiToken }}\" \\\n  -H \"Content-Type: multipart/form-data\" \\\n  -F \"file=@{你的 文件路徑};\"\n```\n### 示例返回值\n\n*Tips:上傳完畢後，請盡快寫入data 中的數據到附件單元格里，否則附件鏈接可能失效*\n\n```json\n{\n  \"code\": 200,\n  \"success\": true,\n  \"message\": \"請求成功\",\n  \"data\": {\n    \"id\": \"atcPtxnvqti5M\",\n    \"name\": \"6.gif\",\n    \"size\": 33914,\n    \"mimeType\": \"image/gif\",\n    \"token\": \"space/2020/09/22/01ee7202922d48688f61e34f12da5abc\",\n    \"width\": 240,\n    \"height\": 240,\n    \"url\": \"https://s1.apitable.com/space/2023/02/09/ed97d84948c648498f6b36b1b769071f\"\n  }\n}\n```"
         },
         "workbench_share_link_template": {
-            "zh_CN": "【APITable】- ${nickName}给你分享了《${nodeName}》",
-            "en_US": "From APITable: ${nickName} has shared the \"${nodeName}\" file with you.",
-            "zh_HK": "【APITable】- ${nickName}給你分享了《${nodeName}》"
+            "zh_CN": "【Smart OA】- ${nickName}给你分享了《${nodeName}》",
+            "en_US": "From Smart OA: ${nickName} has shared the \"${nodeName}\" file with you.",
+            "zh_HK": "【Smart OA】- ${nickName}給你分享了《${nodeName}》"
         },
         "contacts_invite_link_template": {
-            "zh_CN": "【APITable】- ${nickName}邀请你加入「${spaceName}」空间站",
-            "en_US": "From APITable: You were invited to join the \"${spaceName}\" space by ${nickName}.",
-            "zh_HK": "【APITable】- ${nickName}邀請你加入「${spaceName}」空間站"
+            "zh_CN": "【Smart OA】- ${nickName}邀请你加入「${spaceName}」空间站",
+            "en_US": "From Smart OA: You were invited to join the \"${spaceName}\" space by ${nickName}.",
+            "zh_HK": "【Smart OA】- ${nickName}邀請你加入「${spaceName}」空間站"
         },
         "robot_create_name_placeholder": {
             "zh_CN": "罗伯特",
@@ -115,19 +115,19 @@
             "zh_HK": "一分鐘快速入門"
         },
         "section6_title": {
-            "zh_CN": "什么是 APITable？",
-            "en_US": "What is APITable?",
-            "zh_HK": "什麼是 APITable？"
+            "zh_CN": "什么是 Smart OA？",
+            "en_US": "What is Smart OA?",
+            "zh_HK": "什麼是 Smart OA？"
         },
         "assistant_beginner_task_1_what_is_datasheet": {
-            "zh_CN": "什么是 APITable",
-            "en_US": "What is APITable?",
-            "zh_HK": "什麼是 APITable"
+            "zh_CN": "什么是 Smart OA",
+            "en_US": "What is Smart OA?",
+            "zh_HK": "什麼是 Smart OA"
         },
         "welcome_module1": {
-            "zh_CN": "什么是 APITable",
-            "en_US": "What is APITable?",
-            "zh_HK": "什麼是 APITable"
+            "zh_CN": "什么是 Smart OA",
+            "en_US": "What is Smart OA?",
+            "zh_HK": "什麼是 Smart OA"
         },
         "robot_run_history_old_version_tip": {
             "zh_CN": "抱歉，此为旧版本下的运行历史，不支持查看输入输出",
@@ -135,34 +135,34 @@
             "zh_HK": "抱歉，此為舊版本下的運行歷史，不支持查看輸入輸出"
         },
         "system_configuration_product_name": {
-            "zh_CN": "APITable",
-            "en_US": "APITable",
-            "zh_HK": "APITable"
+            "zh_CN": "Smart OA",
+            "en_US": "Smart OA ",
+            "zh_HK": "Smart OA "
         },
         "official_name": {
-            "zh_CN": "APITable",
-            "en_US": "APITable",
-            "zh_HK": "APITable"
+            "zh_CN": "Smart OA",
+            "en_US": "Smart OA ",
+            "zh_HK": "Smart OA "
         },
         "login_title": {
-            "zh_CN": "进入 APITable",
-            "en_US": "Login APITable",
-            "zh_HK": "進入 APITable"
+            "zh_CN": "进入 Smart OA",
+            "en_US": "Login Smart OA",
+            "zh_HK": "進入 Smart OA"
         },
         "assistant_beginner_task_title2": {
-            "zh_CN": "跟着指引开始你的 APITable 之旅吧～",
-            "en_US": "Follow the guide and start your journey in APITable~",
-            "zh_HK": "跟著指引開始你的 APITable 之旅吧～"
+            "zh_CN": "跟着指引开始你的 Smart OA 之旅吧～",
+            "en_US": "Follow the guide and start your journey in Smart OA~",
+            "zh_HK": "跟著指引開始你的 Smart OA 之旅吧～"
         },
         "official_account_qrcode": {
-            "zh_CN": "APITable",
-            "en_US": "APITable",
-            "zh_HK": "APITable"
+            "zh_CN": "Smart OA",
+            "en_US": "Smart OA ",
+            "zh_HK": "Smart OA "
         },
         "test_function_card_info_robot": {
-            "zh_CN": "使用机器人，将 APITable 中的重复性操作自动化，解放员工生产力",
+            "zh_CN": "使用机器人，将 Smart OA 中的重复性操作自动化，解放员工生产力",
             "en_US": "Robots help you automate repetitive actions in the datasheets and free up your team's productivity",
-            "zh_HK": "使用機器人，將 APITable 中的重複性操作自動化，解放員工生產力"
+            "zh_HK": "使用機器人，將 Smart OA 中的重複性操作自動化，解放員工生產力"
         },
         "robot_trigger_record_matches_condition_config_2_desc": {
             "zh_CN": "注意：不支持在匹配条件中添加日期列或者包含日期函数的公式列来实现定时触发或到期触发 [FAQ 参考](https://help.apitable.com/docs/guide/manual-automation-robot#robot-scene-related-faq)",
@@ -170,9 +170,9 @@
             "zh_HK": "注意：不支持在匹配條件中添加日期列或者包含日期函數的公式列來實現定時觸發或到期觸發 [FAQ 參考](https://help.apitable.com/docs/guide/manual-automation-robot#robot-scene-related-faq)"
         },
         "api_panel_type_default_example_email": {
-            "zh_CN": "support@apitable.com",
-            "en_US": "support@apitable.com",
-            "zh_HK": "support@apitable.com"
+            "zh_CN": "darcy.zhang.2023@gmail.com",
+            "en_US": "darcy.zhang.2023@gmail.com",
+            "zh_HK": "darcy.zhang.2023@gmail.com"
         },
         "api_panel_type_default_example_member": {
             "zh_CN": "[\n    {\n        \"id\": \"1291258301781176321\",\n        \"type\": 3,\n        \"name\": \"小葵\",\n        \"avatar\": \"https://s1.apitable.com/space/2023/02/09/79e112dd10424ac7842256736e4f5568\"\n    }\n]",
@@ -185,9 +185,9 @@
             "zh_HK": "https://apitable.com"
         },
         "share_modal_desc": {
-            "zh_CN": "复制下方专属链接~ <br/>邀请好友使用 APITable <br/>与朋友一起“友”福同享",
-            "en_US": "Copy the exclusive link below~ <br/>Invite friends to use APITable<br/>Share with friends",
-            "zh_HK": "複製下方專屬鏈接~ <br/>邀請好友使用 APITable <br/>與朋友一起“友”福同享"
+            "zh_CN": "复制下方专属链接~ <br/>邀请好友使用 Smart OA <br/>与朋友一起“友”福同享",
+            "en_US": "Copy the exclusive link below~ <br/>Invite friends to use Smart OA<br/>Share with friends",
+            "zh_HK": "複製下方專屬鏈接~ <br/>邀請好友使用 Smart OA <br/>與朋友一起“友”福同享"
         },
         "help_user_community": {
             "zh_CN": "加入社区",
@@ -200,9 +200,9 @@
             "zh_HK": "https://help.apitable.com/docs/guide/intro-dashboard"
         },
         "welcome_workspace_tip2": {
-            "zh_CN": "欢迎来到 APITable，开始体验「积木式多媒体数据表格」",
-            "en_US": "Welcome to APITable, let's start our journey to \"building blocks-like multimedia database-spreadsheet hybrid\"!",
-            "zh_HK": "歡迎來到 APITable，開始體驗「積木式多媒體數據表格」"
+            "zh_CN": "欢迎来到 Smart OA，开始体验「积木式多媒体数据表格」",
+            "en_US": "Welcome to Smart OA, let's start our journey to \"building blocks-like multimedia database-spreadsheet hybrid\"!",
+            "zh_HK": "歡迎來到 Smart OA，開始體驗「積木式多媒體數據表格」"
         },
         "mirror_help_url": {
             "zh_CN": "https://help.apitable.com/docs/guide/manual-mirror",
@@ -210,9 +210,9 @@
             "zh_HK": "https://help.apitable.com/docs/guide/manual-mirror"
         },
         "welcome_title": {
-            "zh_CN": "感谢使用 APITable",
-            "en_US": "Welcome to APITable!",
-            "zh_HK": "感謝使用 APITable"
+            "zh_CN": "感谢使用 Smart OA",
+            "en_US": "Welcome to Smart OA!",
+            "zh_HK": "感謝使用 Smart OA"
         },
         "social_plat_bind_space_seats_err": {
             "zh_CN": "当前空间站成员数上限为${count}人，如想提高上限， 请<a href='https://help.apitable.com/docs/guide/how-contact-service' target=\"_blank\">联系我们</a>",
@@ -240,29 +240,29 @@
             "zh_HK": "取消懸浮"
         },
         "system_configuration_company_name_short": {
-            "zh_CN": "APITable",
-            "en_US": "APITable",
-            "zh_HK": "APITable"
+            "zh_CN": "Smart OA",
+            "en_US": "Smart OA ",
+            "zh_HK": "Smart OA "
         },
         "official_template_centre_description": {
             "zh_CN": "官方模板中心",
-            "en_US": "Recommended by APITable",
+            "en_US": "Recommended by Smart OA",
             "zh_HK": "官方模板中心"
         },
         "marketing_sub_title": {
-            "zh_CN": "由 APITable 官方集成的第三方应用",
-            "en_US": "APITable brings your work tools together by integrating third-party applications. Integrations help connect your data and make APITable even more useful.",
-            "zh_HK": "由 APITable 官方集成的第三方應用"
+            "zh_CN": "由 Smart OA 官方集成的第三方应用",
+            "en_US": "Smart OA  brings your work tools together by integrating third-party applications. Integrations help connect your data and make Smart OA even more useful.",
+            "zh_HK": "由 Smart OA 官方集成的第三方應用"
         },
         "assistant_beginner_task_title1": {
-            "zh_CN": "欢迎来到 APITable",
-            "en_US": "Welcome to APITable",
-            "zh_HK": "歡迎來到 APITable"
+            "zh_CN": "欢迎来到 Smart OA",
+            "en_US": "Welcome to Smart OA",
+            "zh_HK": "歡迎來到 Smart OA"
         },
         "setting_nickname_title": {
-            "zh_CN": "恭喜你拿到 APITable 的居民身份证",
-            "en_US": "Congratulations on landing on APITable",
-            "zh_HK": "恭喜你拿到 APITable 的居民身份證"
+            "zh_CN": "恭喜你拿到 Smart OA 的居民身份证",
+            "en_US": "Congratulations on landing on Smart OA",
+            "zh_HK": "恭喜你拿到 Smart OA 的居民身份證"
         },
         "gallery_group_hlep_url": {
             "zh_CN": "https://help.apitable.com/docs/guide/manual-gallery-view",
@@ -515,19 +515,19 @@
             "zh_HK": "https://help.apitable.com/docs/guide/manual-field-attachment"
         },
         "price_title1": {
-            "zh_CN": "APITable",
-            "en_US": "APITable",
-            "zh_HK": "APITable"
+            "zh_CN": "Smart OA",
+            "en_US": "Smart OA ",
+            "zh_HK": "Smart OA "
         },
         "new_user_welcom_notify": {
-            "zh_CN": "欢迎加入 APITable，我们为你准备了一份免费学习 APITable 的见面礼，点击这条消息即可跳转了解详情。",
-            "en_US": "Welcome to APITable, we have prepared a free meeting gift for you to learn APITable, click on this message to jump to learn more.",
-            "zh_HK": "歡迎加入 APITable，我們為你準備了一份免費學習 APITable 的見面禮，點擊這條消息即可跳轉了解詳情。"
+            "zh_CN": "欢迎加入 Smart OA，我们为你准备了一份免费学习 Smart OA 的见面礼，点击这条消息即可跳转了解详情。",
+            "en_US": "Welcome to Smart OA, we have prepared a free meeting gift for you to learn Smart OA, click on this message to jump to learn more.",
+            "zh_HK": "歡迎加入 Smart OA，我們為你準備了一份免費學習 Smart OA 的見面禮，點擊這條消息即可跳轉了解詳情。"
         },
         "private_product_point": {
-            "zh_CN": "一键拥有自己的 APITable 平台",
-            "en_US": "Own your APITable platform with one click",
-            "zh_HK": "一鍵擁有自己的 APITable 平台"
+            "zh_CN": "一键拥有自己的 Smart OA 平台",
+            "en_US": "Own your Smart OA platform with one click",
+            "zh_HK": "一鍵擁有自己的 Smart OA 平台"
         },
         "widget_import_from_airtable_step_2_description": {
             "zh_CN": "请为下面待导入的 Airtable 字段选择字段类型，导入完成后将在表格中创建相应的字段并填充对应的数据",
@@ -540,9 +540,9 @@
             "zh_HK": "成員可導出表格和視圖"
         },
         "inclusion_plan_title": {
-            "zh_CN": "APITable 创业扶持与教育普惠计划",
-            "en_US": "APITable Entrepreneurship Support and Education Inclusive Program",
-            "zh_HK": "APITable 創業扶持與教育普惠計劃"
+            "zh_CN": "Smart OA 创业扶持与教育普惠计划",
+            "en_US": "Smart OA  Entrepreneurship Support and Education Inclusive Program",
+            "zh_HK": "Smart OA  創業扶持與教育普惠計劃"
         },
         "subscribed_record_commented": {
             "zh_CN": "<a class=\"memberName\"></a>在「<a class=\"nodeName\"></a>」表格「<a class=\"recordTitle\"></a>」的记录进行了评论：「<a class=\"content\"></a>」",
@@ -585,9 +585,9 @@
             "zh_HK": "未找到名稱為“${value}”的字段"
         },
         "welcome_workspace_tip1": {
-            "zh_CN": "你可以快速创建一个表格，开启 APITable 旅程",
+            "zh_CN": "你可以快速创建一个表格，开启 Smart OA 旅程",
             "en_US": "You can create a datasheet in a blink and start the journey with us!",
-            "zh_HK": "你可以快速創建一個表格，開啟 APITable 旅程"
+            "zh_HK": "你可以快速創建一個表格，開啟 Smart OA 旅程"
         },
         "error_set_column_failed_bad_property": {
             "zh_CN": "设置字段属性失败：字段属性异常",
@@ -610,14 +610,14 @@
             "zh_HK": "<a class=\"memberName\"></a>在「<a class=\"nodeName\"></a>」表格<a class=\"times\"></a>中，對字段 [<a class=\"fieldName\"></a>]添加 [<a class=\"unitName\"></a>]的角色為 [<a class=\"role\"></a>]"
         },
         "section6_desc": {
-            "zh_CN": "APITable，不是电子表格，是新一代的数据生产力平台。多维表格的首创者，无需代码技术即可完成企业/团队系统的深度定制。作为「下一个职场必备技能」，比 Excel 更好上手，比 Python 更具实用性，APITable 可以实现：",
-            "en_US": "APITable, not a spreadsheet, is a new generation of data productivity platform. The creator of multi-dimensional tables, achieves the in-depth customization of enterprise/team systems without coding. As the \"next necessary skill for the workplace\", it is easier to use than Excel and more practical than Python. APITable can achieve:",
-            "zh_HK": "APITable，不是電子表格，是新一代的數據生產力平台。多維表格的首創者，無需代碼技術即可完成企業/團隊系統的深度定制。作為「下一個職場必備技能」，比 Excel 更好上手，比 Python 更具實用性，APITable 可以實現："
+            "zh_CN": "Smart OA，不是电子表格，是新一代的数据生产力平台。多维表格的首创者，无需代码技术即可完成企业/团队系统的深度定制。作为「下一个职场必备技能」，比 Excel 更好上手，比 Python 更具实用性，Smart OA 可以实现：",
+            "en_US": "Smart OA, not a spreadsheet, is a new generation of data productivity platform. The creator of multi-dimensional tables, achieves the in-depth customization of enterprise/team systems without coding. As the \"next necessary skill for the workplace\", it is easier to use than Excel and more practical than Python. Smart OA can achieve:",
+            "zh_HK": "Smart OA，不是電子表格，是新一代的數據生產力平台。多維表格的首創者，無需代碼技術即可完成企業/團隊系統的深度定制。作為「下一個職場必備技能」，比 Excel 更好上手，比 Python 更具實用性，Smart OA 可以實現："
         },
         "bronze_grade_desc": {
-            "zh_CN": "适用于刚上手 APITable 的个人或团队",
-            "en_US": "Suitable for individuals or teams who are new to APITable",
-            "zh_HK": "適用於剛上手 APITable 的個人或團隊"
+            "zh_CN": "适用于刚上手 Smart OA 的个人或团队",
+            "en_US": "Suitable for individuals or teams who are new to Smart OA",
+            "zh_HK": "適用於剛上手 Smart OA 的個人或團隊"
         },
         "function_t_summary": {
             "zh_CN": "如果输入值为文本类型，则返回原文本，如果非文本类型则返回空值。\n\n【value】是被检查是否为文本的值。\n\n比如，输入值引用数字、日期等类型的字段，那么将会返回空值。",
@@ -710,24 +710,24 @@
             "zh_HK": "請輸入表格名稱"
         },
         "template_centre": {
-            "zh_CN": "APITable 模板中心",
+            "zh_CN": "Smart OA 模板中心",
             "en_US": "Templates",
-            "zh_HK": "APITable 模板中心"
+            "zh_HK": "Smart OA  模板中心"
         },
         "activity_login_desc": {
-            "zh_CN": "你的好友「${nickname}」邀请你注册使用 APITable",
-            "en_US": "Your friend \"${nickname}\" has invited you to sign up on APITable",
-            "zh_HK": "你的好友「${nickname}」邀請你註冊使用 APITable"
+            "zh_CN": "你的好友「${nickname}」邀请你注册使用 Smart OA",
+            "en_US": "Your friend \"${nickname}\" has invited you to sign up on Smart OA",
+            "zh_HK": "你的好友「${nickname}」邀請你註冊使用 Smart OA"
         },
         "unbind_third_party_accounts_desc": {
-            "zh_CN": "解绑后 APITable 仍可正常使用，但会影响使用${mode}帐号登录 APITable",
+            "zh_CN": "解绑后 Smart OA 仍可正常使用，但会影响使用${mode}帐号登录 Smart OA",
             "en_US": "After unbinding, you can still use the application but can't use the ${mode} account to log in",
-            "zh_HK": "解綁後 APITable 仍可正常使用，但會影響使用${mode}帳號登錄 APITable"
+            "zh_HK": "解綁後 Smart OA 仍可正常使用，但會影響使用${mode}帳號登錄 Smart OA"
         },
         "error_page_feedback_text": {
-            "zh_CN": "👉   向 APITable 报告问题，帮助 APITable 解决技术问题",
+            "zh_CN": "👉   向 Smart OA 报告问题，帮助 Smart OA 解决技术问题",
             "en_US": "👉  Report issues",
-            "zh_HK": "👉   向 APITable 報告問題，幫助 APITable 解決技術問題"
+            "zh_HK": "👉   向 Smart OA 報告問題，幫助 Smart OA 解決技術問題"
         },
         "field_title": {
             "zh_CN": "字段名",
@@ -915,9 +915,9 @@
             "zh_HK": "當前沒有表格視圖，無法生成表單"
         },
         "add_gallery_view_success_guide": {
-            "zh_CN": "对于带有图片的表格，相册视图可以很直观的展示你的数据。另外，APITable 还有更多有趣的功能正在迭代，敬请期待～",
+            "zh_CN": "对于带有图片的表格，相册视图可以很直观的展示你的数据。另外，Smart OA 还有更多有趣的功能正在迭代，敬请期待～",
             "en_US": "For the datasheet with pictures, the gallery view will display it very intuitively. Many interesting functions are on the way. Stay tuned~",
-            "zh_HK": "對於帶有圖片的表格，相冊視圖可以很直觀的展示你的數據。另外，APITable 還有更多有趣的功能正在迭代，敬請期待～"
+            "zh_HK": "對於帶有圖片的表格，相冊視圖可以很直觀的展示你的數據。另外，Smart OA 還有更多有趣的功能正在迭代，敬請期待～"
         },
         "del_field_tip": {
             "zh_CN": "删除字段",
@@ -930,14 +930,14 @@
             "zh_HK": "當前文件夾下存在關聯了本文件夾內容外的表格，繼續開啟分享？"
         },
         "follow_up_guidelines": {
-            "zh_CN": "使用电脑打开 APITable 可获更佳体验",
-            "en_US": "Get a better experience by using APITable on computer.",
-            "zh_HK": "使用電腦打開 APITable 可獲更佳體驗"
+            "zh_CN": "使用电脑打开 Smart OA 可获更佳体验",
+            "en_US": "Get a better experience by using Smart OA on computer.",
+            "zh_HK": "使用電腦打開 Smart OA 可獲更佳體驗"
         },
         "guide_2": {
-            "zh_CN": "花费几分钟跟随我们的指引，学习一下 APITable 的常规功能，可以让您事半功倍哦！",
+            "zh_CN": "花费几分钟跟随我们的指引，学习一下 Smart OA 的常规功能，可以让您事半功倍哦！",
             "en_US": "It takes only a few minutes to learn the basic functions. Work more productively from this moment on!",
-            "zh_HK": "花費幾分鐘跟隨我們的指引，學習一下 APITable 的常規功能，可以讓您事半功倍哦！"
+            "zh_HK": "花費幾分鐘跟隨我們的指引，學習一下 Smart OA 的常規功能，可以讓您事半功倍哦！"
         },
         "guide_flow_of_catalog_step2": {
             "zh_CN": "工作目录里面，除了可以单独创建表格，也可以单独创建文件夹",
@@ -960,9 +960,9 @@
             "zh_HK": "這就是你的表格內容啦，裡面都是你的數據哦～"
         },
         "invitation_validation_title": {
-            "zh_CN": "Oops~ 当前大量用户涌入 APITable",
+            "zh_CN": "Oops~ 当前大量用户涌入 Smart OA",
             "en_US": "Oops, a large batch of users are flooding into the Space right now.",
-            "zh_HK": "Oops~ 當前大量用戶湧入 APITable"
+            "zh_HK": "Oops~ 當前大量用戶湧入 Smart OA"
         },
         "long_time_no_operate": {
             "zh_CN": "该表格已经很久未操作，请刷新页面保持数据为最新~",
@@ -980,9 +980,9 @@
             "zh_HK": "當前分享的表格存在關聯其他表格的內容，繼續開啟分享？"
         },
         "personal_invite_code_tip": {
-            "zh_CN": "个人邀请码：可以寻找已成为 APITable 的用户获取个人邀请码。",
+            "zh_CN": "个人邀请码：可以寻找已成为 Smart OA 的用户获取个人邀请码。",
             "en_US": "To get a personal invite code: obtain a code from a current user.",
-            "zh_HK": "個人邀請碼：可以尋找已成為 APITable 的用戶獲取個人邀請碼。"
+            "zh_HK": "個人邀請碼：可以尋找已成為 Smart OA 的用戶獲取個人邀請碼。"
         },
         "rollup_field": {
             "zh_CN": "关联表中被引用的字段",
@@ -995,14 +995,14 @@
             "zh_HK": "搜索字段"
         },
         "swagger_constants_desc": {
-            "zh_CN": "APITable 融合开放 API 文档，帮助你基于强大的 APITable 数据库快速构建应用",
+            "zh_CN": "Smart OA 融合开放 API 文档，帮助你基于强大的 Smart OA 数据库快速构建应用",
             "en_US": "Combination of grid and datasheet and built-in API, helping you to establish application in a blink based on this powerful database-spreadsheet hybrid",
-            "zh_HK": "APITable 融合開放 API 文檔，幫助你基於強大的 APITable 數據庫快速構建應用"
+            "zh_HK": "Smart OA 融合開放 API 文檔，幫助你基於強大的 Smart OA 數據庫快速構建應用"
         },
         "tip_setting_nickname_distribute": {
-            "zh_CN": "「${nickname}」是 APITable 为你分配的随机昵称～",
+            "zh_CN": "「${nickname}」是 Smart OA 为你分配的随机昵称～",
             "en_US": "\"${nickname}\" is a random nickname~",
-            "zh_HK": "「${nickname}」是 APITable 為你分配的隨機暱稱～"
+            "zh_HK": "「${nickname}」是 Smart OA 為你分配的隨機暱稱～"
         },
         "using_template_title": {
             "zh_CN": "通过该模板来创建表格",
@@ -1060,9 +1060,9 @@
             "zh_HK": "引用字段：{列名}\n使用運算符：2 * 5\n使用函數：AVERAGE({數字列1}, {數字列2})\n使用IF語句：IF(邏輯條件, \"值1\", \"值2\")"
         },
         "function_left_example": {
-            "zh_CN": "LEFT(\"APITable：支持API，随意DIY\", 8)\n=> APITable \n\nLEFT({出生年月}, 4)\n=> 1994",
+            "zh_CN": "LEFT(\"Smart OA：支持API，随意DIY\", 8)\n=> Smart OA \n\nLEFT({出生年月}, 4)\n=> 1994",
             "en_US": "LEFT({date of birth}, 4)\n=> 1994",
-            "zh_HK": "LEFT(\"APITable：支持API，隨意DIY\", 8)\n=> APITable \n\nLEFT({出生年月}, 4)\n=> 1994"
+            "zh_HK": "LEFT(\"Smart OA：支持API，隨意DIY\", 8)\n=> Smart OA \n\nLEFT({出生年月}, 4)\n=> 1994"
         },
         "function_is_same_summary": {
             "zh_CN": "确定日期1是否等于日期2，如果等于则返回真（true），否则返回假（false）。\n\n【date1】是日期1。\n【date2】是日期2。\n【units】非必填， 是比较的时间单位。比如比较两个日期是否相等，一直对比到分钟单位。\n\n日期可以是输入的参数，见用例一；\n日期也可以是引用日期类型的字段，见用例四。\n在单元格内真和假用\"已勾选\"和\"未勾选\"表示。\n\n点击下方链接可查看全部计时单位。",
@@ -1080,9 +1080,9 @@
             "zh_HK": "比較日期1是否晚於日期2，如果晚於則返回真（true），否則返回假（false）。\n\n【date1】是日期1。\n【date2】是日期2。\n\n日期可以是輸入的參數，見用例一；\n日期也可以是引用日期類型的字段，見用例二。\n\n在單元格內真和假用\"已勾選\"和\"未勾選\"表示。"
         },
         "function_right_example": {
-            "zh_CN": "RIGHT(\"APITable：支持API，随意DIY\", 5)\n=> 随意DIY\n\nRIGHT({出生年月}, 5)\n=> 07-13",
+            "zh_CN": "RIGHT(\"Smart OA：支持API，随意DIY\", 5)\n=> 随意DIY\n\nRIGHT({出生年月}, 5)\n=> 07-13",
             "en_US": "RIGHT({date of birth}, 5)\n=> 07-13",
-            "zh_HK": "RIGHT(\"APITable：支持API，隨意DIY\", 5)\n=> 隨意DIY\n\nRIGHT({出生年月}, 5)\n=> 07-13"
+            "zh_HK": "RIGHT(\"Smart OA：支持API，隨意DIY\", 5)\n=> 隨意DIY\n\nRIGHT({出生年月}, 5)\n=> 07-13"
         },
         "function_or_summary": {
             "zh_CN": "如果任何一个参数为真（true），则返回真（true），否则返回假（false）。\n\n【logical】是逻辑参数，可以是逻辑值、数组或引用的字段。",
@@ -1090,9 +1090,9 @@
             "zh_HK": "如果任何一個參數為真（true），則返回真（true），否則返回假（false）。\n\n【logical】是邏輯參數，可以是邏輯值、數組或引用的字段。"
         },
         "function_t_example": {
-            "zh_CN": "T(\"APITable\")\n=> APITable \n\nT(\"55\")\n=> 55 \n\nT(55)\n=> 空值\n\nT({数学成绩})\n=> 空值",
+            "zh_CN": "T(\"Smart OA\")\n=> Smart OA \n\nT(\"55\")\n=> 55 \n\nT(55)\n=> 空值\n\nT({数学成绩})\n=> 空值",
             "en_US": "T({name})\n=> kelly\n\nT(3.2)\n=> BLANK",
-            "zh_HK": "T(\"APITable\")\n=> APITable \n\nT(\"55\")\n=> 55 \n\nT(55)\n=> 空值\n\nT({數學成績})\n=> 空值    "
+            "zh_HK": "T(\"Smart OA\")\n=> Smart OA \n\nT(\"55\")\n=> 55 \n\nT(55)\n=> 空值\n\nT({數學成績})\n=> 空值    "
         },
         "function_xor_summary": {
             "zh_CN": "如果奇数个参数为真（true），则返回真（true），否则返回假（false）。\n\n【logical】是逻辑参数，可以是逻辑值、数组或引用的字段。",
@@ -1290,19 +1290,19 @@
             "zh_HK": "字段"
         },
         "api_panel_type_desc_member": {
-            "zh_CN": "由若干「组织单元（unit）」组成的数组  「组织单元」是 APITable 中描述“空间站”与“成员”之间的关系的一个抽象概念。成员（member）、小组（team）都是一种组织单元。  id (string) : 组织单元的ID type (number) : 组织单元的类型，1是小组，3是成员 name (string) : 组织单元的名称，如果 type 是1，此值为小组名称；如果 type 是3，此值为成员站内昵称",
+            "zh_CN": "由若干「组织单元（unit）」组成的数组  「组织单元」是 Smart OA 中描述“空间站”与“成员”之间的关系的一个抽象概念。成员（member）、小组（team）都是一种组织单元。  id (string) : 组织单元的ID type (number) : 组织单元的类型，1是小组，3是成员 name (string) : 组织单元的名称，如果 type 是1，此值为小组名称；如果 type 是3，此值为成员站内昵称",
             "en_US": "Returns an array of unit objects. A unit describes the roles in a Space such as a member or a team. \"type\" has two values: 1 stands for team; 3 stands for member.",
-            "zh_HK": "由若干「組織單元（unit）」組成的數組  「組織單元」是 APITable 中描述“空間站”與“成員”之間的關係的一個抽象概念。成員（member）、小組（team）都是一種組織單元。 id (string) : 組織單元的ID type (number) : 組織單元的類型，1是小組，3是成員 name (string) : 組織單元的名稱，如果 type 是1，此值為小組名稱；如果 type 是3，此值為成員站內暱稱"
+            "zh_HK": "由若干「組織單元（unit）」組成的數組  「組織單元」是 Smart OA 中描述“空間站”與“成員”之間的關係的一個抽象概念。成員（member）、小組（team）都是一種組織單元。 id (string) : 組織單元的ID type (number) : 組織單元的類型，1是小組，3是成員 name (string) : 組織單元的名稱，如果 type 是1，此值為小組名稱；如果 type 是3，此值為成員站內暱稱"
         },
         "api_panel_type_desc_last_modified_by": {
-            "zh_CN": "最近一次编辑记录/指定字段的成员（unit），以数组形式返回  「组织单元」是 APITable 中描述“空间站”与“成员”之间的关系的一个抽象概念。成员（member）、小组（team）都是一种组织单元。  *修改人必须为成员（member） unitId (string) : 组织单元的ID unitType (number) : 组织单元的类型，1是小组，3是成员 unitName (string) : 组织单元的名称，如果unitType是1，此值为小组名称；如果unitType是3，此值为成员站内昵称",
+            "zh_CN": "最近一次编辑记录/指定字段的成员（unit），以数组形式返回  「组织单元」是 Smart OA 中描述“空间站”与“成员”之间的关系的一个抽象概念。成员（member）、小组（team）都是一种组织单元。  *修改人必须为成员（member） unitId (string) : 组织单元的ID unitType (number) : 组织单元的类型，1是小组，3是成员 unitName (string) : 组织单元的名称，如果unitType是1，此值为小组名称；如果unitType是3，此值为成员站内昵称",
             "en_US": "Returns an array that contains one unit object. The unit is the last unit that modifies the record or the specified field(s). (A unit describes the roles in a Space such as a member or a team. \"unitType\" has two values: 1 stands for team; 3 stands for member.)",
-            "zh_HK": "最近一次編輯記錄/指定字段的成員（unit），以數組形式返回  「組織單元」是 APITable 中描述“空間站”與“成員”之間的關係的一個抽象概念。成員（member）、小組（team）都是一種組織單元。 *修改人必須為成員（member） unitId (string) : 組織單元的ID unitType (number) : 組織單元的類型，1是小組，3是成員 unitName (string) : 組織單元的名稱，如果unitType是1，此值為小組名稱；如果unitType是3，此值為成員站內暱稱"
+            "zh_HK": "最近一次編輯記錄/指定字段的成員（unit），以數組形式返回  「組織單元」是 Smart OA 中描述“空間站”與“成員”之間的關係的一個抽象概念。成員（member）、小組（team）都是一種組織單元。 *修改人必須為成員（member） unitId (string) : 組織單元的ID unitType (number) : 組織單元的類型，1是小組，3是成員 unitName (string) : 組織單元的名稱，如果unitType是1，此值為小組名稱；如果unitType是3，此值為成員站內暱稱"
         },
         "api_panel_type_desc_created_by": {
-            "zh_CN": "创建此记录的成员（unit），以数组形式返回  「组织单元」是 APITable 中描述“空间站”与“成员”之间的关系的一个抽象概念。成员（member）、小组（team）都是一种组织单元。  *创建人必须为成员（member） unitId (string) : 组织单元的ID unitType (number) : 组织单元的类型，1是小组，3是成员 unitName (string) : 组织单元的名称，如果unitType是1，此值为小组名称；如果unitType是3，此值为成员站内昵称",
+            "zh_CN": "创建此记录的成员（unit），以数组形式返回  「组织单元」是 Smart OA 中描述“空间站”与“成员”之间的关系的一个抽象概念。成员（member）、小组（team）都是一种组织单元。  *创建人必须为成员（member） unitId (string) : 组织单元的ID unitType (number) : 组织单元的类型，1是小组，3是成员 unitName (string) : 组织单元的名称，如果unitType是1，此值为小组名称；如果unitType是3，此值为成员站内昵称",
             "en_US": "Returns an array that contains one unit object. The unit is the member that creates the record. (A unit describes the roles in a Space such as a member or a team. \"unitType\" has two values: 1 stands for team; 3 stands for member.)",
-            "zh_HK": "創建此記錄的成員（unit），以數組形式返回  「組織單元」是 APITable 中描述“空間站”與“成員”之間的關係的一個抽象概念。成員（member）、小組（team）都是一種組織單元。 *創建人必須為成員（member） unitId (string) : 組織單元的ID unitType (number) : 組織單元的類型，1是小組，3是成員 unitName (string) : 組織單元的名稱，如果unitType是1，此值為小組名稱；如果unitType是3，此值為成員站內暱稱"
+            "zh_HK": "創建此記錄的成員（unit），以數組形式返回  「組織單元」是 Smart OA 中描述“空間站”與“成員”之間的關係的一個抽象概念。成員（member）、小組（team）都是一種組織單元。 *創建人必須為成員（member） unitId (string) : 組織單元的ID unitType (number) : 組織單元的類型，1是小組，3是成員 unitName (string) : 組織單元的名稱，如果unitType是1，此值為小組名稱；如果unitType是3，此值為成員站內暱稱"
         },
         "subject_datasheet_remind": {
             "zh_CN": "{MEMBER_NAME}在表格内提及了你",
@@ -1355,24 +1355,24 @@
             "zh_HK": "移動後，文件的可見性可能會受到上級文件夾的影響"
         },
         "og_site_name_content": {
-            "zh_CN": "APITable",
-            "en_US": "APITable",
-            "zh_HK": "APITable"
+            "zh_CN": "Smart OA",
+            "en_US": "Smart OA ",
+            "zh_HK": "Smart OA "
         },
         "og_product_description_content": {
-            "zh_CN": "APITable, 积木式多媒体数据表格, 多维表格技术首创者, 数据整理神器, 让人人都是数据设计师",
-            "en_US": "APITable, building block multimedia datasheet, pioneer of multidimensional tables technology, data sorting artifact, making everyone a data designer",
-            "zh_HK": "APITable, 積木式多媒體數據表格, 多維表格技術首創者, 數據整理神器, 讓人人都是數據設計師"
+            "zh_CN": "Smart OA, 积木式多媒体数据表格, 多维表格技术首创者, 数据整理神器, 让人人都是数据设计师",
+            "en_US": "Smart OA , building block multimedia datasheet, pioneer of multidimensional tables technology, data sorting artifact, making everyone a data designer",
+            "zh_HK": "Smart OA , 積木式多媒體數據表格, 多維表格技術首創者, 數據整理神器, 讓人人都是數據設計師"
         },
         "og_keywords_content": {
-            "zh_CN": "APITable,大数据,数字化,数字化转型,数据中台,业务中台,数据资产,数字化智能办公,远程办公,数据工作台,区块链,人工智能,多维表格,aPaaS,hpaPaaS,RAD,数据库应用,快速开发工具",
-            "en_US": "APITable, big data, digitization, digital transformation, data center, business center, data assets, digital smart office, remote office, data workbench, blockchain, artificial intelligence, multidimensional tables, aPaaS, hpaPaaS, RAD, database applications, rapid development tools",
-            "zh_HK": "APITable,大數據,數字化,數字化轉型,數據中台,業務中台,數據資產,數字化智能辦公,遠程辦公,數據工作台,區塊鏈,人工智能,多維表格,aPaaS,hpaPaaS,RAD,數據庫應用,快速開發工具"
+            "zh_CN": "Smart OA,大数据,数字化,数字化转型,数据中台,业务中台,数据资产,数字化智能办公,远程办公,数据工作台,区块链,人工智能,多维表格,aPaaS,hpaPaaS,RAD,数据库应用,快速开发工具",
+            "en_US": "Smart OA , big data, digitization, digital transformation, data center, business center, data assets, digital smart office, remote office, data workbench, blockchain, artificial intelligence, multidimensional tables, aPaaS, hpaPaaS, RAD, database applications, rapid development tools",
+            "zh_HK": "Smart OA ,大數據,數字化,數字化轉型,數據中台,業務中台,數據資產,數字化智能辦公,遠程辦公,數據工作台,區塊鏈,人工智能,多維表格,aPaaS,hpaPaaS,RAD,數據庫應用,快速開發工具"
         },
         "auth_server_extensions_login_description_content": {
-            "zh_CN": "APITable 统一登录页",
-            "en_US": "APITable Unified Login Page",
-            "zh_HK": "APITable 統一登錄頁"
+            "zh_CN": "Smart OA 统一登录页",
+            "en_US": "Smart OA  Unified Login Page",
+            "zh_HK": "Smart OA  統一登錄頁"
         },
         "initialization_failed_message": {
             "zh_CN": "页面在加载的过程中有未初始化成功的数据，请刷新重试",
@@ -1580,14 +1580,14 @@
             "zh_HK": "登錄"
         },
         "bronze_grade": {
-            "zh_CN": "社区版",
-            "en_US": "Community",
-            "zh_HK": "社區版"
+            "zh_CN": "Inner",
+            "en_US": "Inner",
+            "zh_HK": "Inner"
         },
         "new_user_welcome_notify": {
-            "zh_CN": "欢迎加入 APITable，我们为你准备了一份免费学习 APITable 的见面礼，点击这条消息即可跳转了解详情。",
-            "en_US": "Welcome to APITable. We have prepared a free meeting gift for you to learn APITable. Click here to learn more.",
-            "zh_HK": "歡迎加入 APITable，我們為你準備了一份免費學習 APITable 的見面禮，點擊這條消息即可跳轉了解詳情。"
+            "zh_CN": "欢迎加入 Smart OA，我们为你准备了一份免费学习 Smart OA 的见面礼，点击这条消息即可跳转了解详情。",
+            "en_US": "Welcome to Smart OA. We have prepared a free meeting gift for you to learn Smart OA. Click here to learn more.",
+            "zh_HK": "歡迎加入 Smart OA，我們為你準備了一份免費學習 Smart OA 的見面禮，點擊這條消息即可跳轉了解詳情。"
         },
         "field_map_tips_for_python": {
             "zh_CN": "存在与变量规则不匹配的字段名称，请打开“使用 Field ID”，否则下面的代码示例可能无法运行！[字段映射](https://github.com/apitable/apitable-sdks/tree/develop/apitable.py#field-mapping)可以帮你解决这个问题。",

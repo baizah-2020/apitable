@@ -34,17 +34,3 @@ export const NavBar: React.FC<React.PropsWithChildren<{gap?: number}>> = (props)
   ];
   return (
     <div className={styles.navBarWrap}>
-      {
-        linkList.map((item, index) => {
-          const A = <a href={item.href} target={item.target}>
-            {item.text}
-          </a>;
-          return <>
-            {A}
-            {index + 1 < linkList.length && <div style={{ margin: `0 ${gap / 2}px` }}>|</div>}
-          </>;
-        })
-      }
-    </div>
-  );
-};
