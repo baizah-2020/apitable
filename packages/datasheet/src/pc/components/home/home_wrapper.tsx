@@ -24,9 +24,9 @@ import { NavBar } from './components/nav_bar';
 import styles from './style.module.less';
 
 export const HomeWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
- 
+
   const colors = useThemeColors();
-  
+
   const linkIcons = [
     {
       icon: SystemConfig.settings.twitter_icon.value,
@@ -47,6 +47,22 @@ export const HomeWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ childr
       <div className={styles.header}>
         <div className={styles.brand}>
 &nbsp;
+        </div>
+        <div className={styles.iconContent}>
+          <div className={styles.linkLine}>
 &nbsp;
-&nbsp;
+          </div>
+          <Box marginLeft={24}>
+            <GithubButton/>
+          </Box>
+        </div>
+      </div>
+      <div className={styles.main}>
+        { children }
+      </div>
+      <div className={styles.footer}>
+        <NavBar />
+      </div>
+    </div>
+  );
 };
