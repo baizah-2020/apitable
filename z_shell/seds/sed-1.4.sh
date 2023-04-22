@@ -10,10 +10,15 @@ cd ../../
 #sed -i 's#apitable.com#darcy.zhang.2023@gmail.com#g'  packages/i18n-lang/src/config/strings.edition.auto.json
 #sed -i 's#apitable.com#darcy.zhang.2023@gmail.com#g'  packages/i18n-lang/src/config/strings.json
 
+sed -i 's#Community#Inner#g' packages/i18n-lang/src/config/strings.auto.json
+sed -i 's#Community#Inner#g' packages/i18n-lang/src/config/strings.edition.auto.json
+sed -i 's#Community#Inner#g' packages/i18n-lang/src/config/strings.json
+
 
 sed -i 's#APITable#Smart OA#g' packages/i18n-lang/src/config/strings.auto.json
 sed -i 's#support@apitable.com#darcy.zhang.2023@gmail.com#g' packages/i18n-lang/src/config/strings.edition.auto.json
 sed -i 's#support@apitable.com#darcy.zhang.2023@gmail.com#g' packages/i18n-lang/src/config/strings.json
+
 
 sed -i 's#"zh_CN": "社区版",#"zh_CN": "Inner",#g' packages/i18n-lang/src/config/strings.auto.json
 sed -i 's#"zh_CN": "社区版",#"zh_CN": "Inner",#g' packages/i18n-lang/src/config/strings.edition.auto.json

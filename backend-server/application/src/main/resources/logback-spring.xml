@@ -88,7 +88,7 @@
 
     <appender name="SENTRY" class="io.sentry.logback.SentryAppender"/>
 
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="ASYNC_FILE_ERROR"/>
         <appender-ref ref="ASYNC_FILE_TOTAL"/>
         <appender-ref ref="CONSOLE"/>

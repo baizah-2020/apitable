@@ -34,3 +34,7 @@ export const NavBar: React.FC<React.PropsWithChildren<{gap?: number}>> = (props)
   ];
   return (
     <div className={styles.navBarWrap}>
+&nbsp;
+    </div>
+  );
+};
