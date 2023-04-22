@@ -78,33 +78,7 @@ export const ReportWeb: FC<React.PropsWithChildren<IReportWeb>> = ({ nodeId }) =
 
   return (
     <div className={styles.reportWeb}>
-      <ComponentDisplay minWidthCompatible={ScreenSize.md}>
-        <RcTrigger
-          action="click"
-          popup={renderMenu()}
-          destroyPopupOnHide
-          popupAlign={{
-            points: ['br', 'bl'],
-            offset: [-10, 0],
-          }}
-          popupStyle={{ width: '240px' }}
-          popupVisible={menuVisible}
-          onPopupVisibleChange={visible => setMenuVisible(visible)}
-          zIndex={1000}
-        >
-          <ButtonPlus.Font onClick={() => setMenuVisible(true)} className={styles.feedbackBtn} icon={<QuestionOutlined />} size="small" shadow />
-        </RcTrigger>
-        {reasonModalVisible && <ReportReason nodeId={nodeId} onClose={() => setReasonModalVisible(false)} />}
-      </ComponentDisplay>
-      <ComponentDisplay maxWidthCompatible={ScreenSize.md}>
-        <MobileContextMenu title={t(Strings.help)} visible={menuVisible} height="50%" data={menuData} onClose={() => setMenuVisible(false)} />
-        <ButtonPlus.Font onClick={() => setMenuVisible(true)} className={styles.feedbackBtn} icon={<QuestionOutlined />} size="small" shadow />
-        {reasonModalVisible && (
-          <Modal className={styles.reasonModal} onCancel={() => setReasonModalVisible(false)} centered footer={null} visible>
-            <ReportReason nodeId={nodeId} onClose={() => setReasonModalVisible(false)} />
-          </Modal>
-        )}
-      </ComponentDisplay>
+&nbsp; 
     </div>
   );
 };
