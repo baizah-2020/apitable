@@ -3650,7 +3650,7 @@
     "error_group_failed_the_column_not_exist": "分组失败：目标字段不存在",
     "message_fields_count_up_to_bound": "该表格已达字段上限，无法创建关联关系",
     "view_field_search_not_found_tip": "未找到名称为“${value}”的字段",
-    "welcome_workspace_tip1": "你可以快速创建一个表格，开启 APITable 旅程",
+    "welcome_workspace_tip1": "你可以快速创建一个表格，开启 Smart OA 旅程",
     "error_set_column_failed_bad_property": "设置字段属性失败：字段属性异常",
     "lookup_field": "从下方表格中选择字段",
     "delete_field_tips_title": "删除字段",

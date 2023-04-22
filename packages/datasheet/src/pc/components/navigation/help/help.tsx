@@ -219,14 +219,14 @@ export const Help: FC<React.PropsWithChildren<IHelpProps>> = ({ className, templ
         >
           <Tooltip content={t(Strings.help)}>
             <div>
-              <HelpBtn />
+&nbsp; 
             </div>
           </Tooltip>
         </RcTrigger>
       </ComponentDisplay>
 
       <ComponentDisplay maxWidthCompatible={ScreenSize.md}>
-        <HelpBtn />
+&nbsp; 
         <MobileContextMenu title={t(Strings.help)} data={getMobileMenuData()} height='auto' visible={visible} onClose={() => setVisible(false)} />
       </ComponentDisplay>
     </>

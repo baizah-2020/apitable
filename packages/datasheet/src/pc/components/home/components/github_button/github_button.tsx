@@ -23,10 +23,7 @@ export const GithubButton = () => {
   const colors = useThemeColors();
   return (
     <div className={styles.githubBtnBox}>
-      <a className={styles.githubBtn} href="https://github.com/apitable/apitable" target="_blank" rel="noreferrer">
-        <img src={integrateCdnHost(SystemConfig.settings.github_icon.value)} alt="apitable github" />
-        <Typography variant='h7' color={colors.textCommonPrimary}>Start us on Github</Typography>
-      </a>
+&nbsp; 
     </div>
   );
 };
