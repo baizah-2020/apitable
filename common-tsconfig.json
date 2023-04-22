@@ -13,11 +13,12 @@
     "noImplicitThis": true,
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noUnusedParameters": false
   }
 }

@@ -8,7 +8,7 @@
       "esnext"
     ],
     "moduleResolution": "node",
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "allowJs": false,

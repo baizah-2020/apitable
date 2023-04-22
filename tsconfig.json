@@ -6,7 +6,9 @@
     "incremental": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
   "exclude": ["**/node_modules", "../enterprise"]
 }
